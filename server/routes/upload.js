@@ -30,3 +30,21 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: fileFilter
 });
+router.post('/', verifyToken, isAdmin, upload.single('image'), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const fileUrl = `/uploads/${req.file.filename}`;
+    res.json({
+      message: 'File uploaded successfully',
+      filename: req.file.filename,
+      url: fileUrl
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Upload failed', error: error.message });
+  }
+});
+
+module.exports = router;
