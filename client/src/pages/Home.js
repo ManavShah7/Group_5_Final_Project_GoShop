@@ -319,6 +319,59 @@ function Home() {
             }}>
               Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
             </div>
+            <Row>
+              {filteredProducts.map((product) => (
+                <Col key={product._id} lg={3} md={4} sm={6} className="mb-4">
+                  <Card 
+                    onClick={() => navigate(`/product/${product._id}`)}
+                    style={{
+                      cursor: 'pointer',
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <div style={{ 
+                      position: 'relative', 
+                      paddingTop: '100%',
+                      overflow: 'hidden',
+                      borderRadius: '12px 12px 0 0'
+                    }}>
+                      <img
+                        src={product.image.startsWith('http') 
+                          ? product.image 
+                          : `http://localhost:5001${product.image}`}
+                        alt={product.name}
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          transition: 'transform 0.3s ease'
+                        }}
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/400x400?text=No+Image';
+                        }}
+                        onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                      />
+                      {product.stock === 0 && (
+                        <div style={{
+                          position: 'absolute',
+                          top: '10px',
+                          right: '10px',
+                          background: '#dc2626',
+                          color: '#fff',
+                          padding: '0.35rem 0.75rem',
+                          borderRadius: '6px',
+                          fontSize: '0.75rem',
+                          fontWeight: '700'
+                        }}>
+                          Sold Out
+                        </div>
+                      )}
       `}</style>
     </>
   );
