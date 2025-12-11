@@ -372,6 +372,84 @@ function Home() {
                           Sold Out
                         </div>
                       )}
+                       {product.stock > 0 && product.stock <= 5 && (
+                        <div style={{
+                          position: 'absolute',
+                          top: '10px',
+                          right: '10px',
+                          background: '#f59e0b',
+                          color: '#fff',
+                          padding: '0.35rem 0.75rem',
+                          borderRadius: '6px',
+                          fontSize: '0.75rem',
+                          fontWeight: '700'
+                        }}>
+                          Only {product.stock} left
+                        </div>
+                      )}
+                    </div>
+                    
+                    <Card.Body style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                      <h3 style={{
+                        fontSize: '1rem',
+                        fontWeight: '600',
+                        marginBottom: '0.5rem',
+                        color: '#171717'
+                      }}>
+                        {product.name}
+                      </h3>
+                      <p style={{
+                        color: '#737373',
+                        fontSize: '0.875rem',
+                        marginBottom: '1rem',
+                        flex: 1
+                      }}>
+                        {product.description.substring(0, 60)}...
+                      </p>
+                      
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginTop: 'auto'
+                      }}>
+                        <div>
+                          <div style={{
+                            fontSize: '1.5rem',
+                            fontWeight: '800',
+                            color: '#000',
+                            letterSpacing: '-0.5px'
+                          }}>
+                            ${product.price}
+                          </div>
+                          <div style={{
+                            fontSize: '0.75rem',
+                            color: '#737373',
+                            marginTop: '0.25rem'
+                          }}>
+                            {product.stock} in stock
+                          </div>
+                        </div>
+                        
+                        <Button
+                          onClick={(e) => addToCart(product, e)}
+                          disabled={product.stock === 0}
+                          style={{
+                            padding: '0.5rem 1rem',
+                            fontSize: '0.875rem'
+                          }}
+                        >
+                          {product.stock === 0 ? 'Out' : 'Add'}
+                        </Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </>
+        )}
+      </Container>
       `}</style>
     </>
   );
