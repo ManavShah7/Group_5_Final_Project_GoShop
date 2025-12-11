@@ -30,3 +30,22 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
+router.post('/', verifyToken, isAdmin, async (req, res) => {
+  try {
+    const { name, description, price, category, image, stock } = req.body;
+
+    const product = new Product({
+      name,
+      description,
+      price,
+      category,
+      image,
+      stock,
+    });
+
+    await product.save();
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
