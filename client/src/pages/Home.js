@@ -303,7 +303,22 @@ function Home() {
           ))}
         </div>
 
-       
+       {filteredProducts.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
+            <h3 style={{ fontWeight: '700', marginBottom: '0.5rem' }}>No products found</h3>
+            <p style={{ color: '#737373' }}>Try a different search or category</p>
+          </div>
+        ) : (
+          <>
+            <div style={{ 
+              marginBottom: '1.5rem',
+              color: '#737373',
+              fontSize: '0.9rem',
+              fontWeight: '500'
+            }}>
+              Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
+            </div>
       `}</style>
     </>
   );
